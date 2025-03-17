@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const mqtt = require('mqtt');
-const fs = require('fs');
 const pg = require('pg');
 const url = require('url');
 
@@ -16,7 +15,8 @@ const config = {
     database: process.env.DB_NAME,
     ssl: {
         rejectUnauthorized: true,
-        ca: fs.readFileSync('certs/ca.pem').toString(),
+        //ca: fs.readFileSync('certs/ca.pem').toString(),
+        ca: process.env.DB_CA,
     },
 };
 
