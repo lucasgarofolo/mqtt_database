@@ -49,7 +49,7 @@ mqttClient.on('connect', () => {
 mqttClient.on('message', async (topic, message) => {
     try {
         const data = JSON.parse(message.toString());
-        console.log('Dados recebidos:', data);
+        //console.log('Dados recebidos:', data);
         
         const query = `INSERT INTO atendimentos (bico_id, tempo_espera, tempo_atendimento, data_hora) VALUES ($1, $2, $3, $4)`;
         const values = [data.bico_id, data.tempo_espera, data.tempo_atendimento, data.data_hora];
