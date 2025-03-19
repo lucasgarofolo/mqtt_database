@@ -51,8 +51,14 @@ mqttClient.on('message', async (topic, message) => {
         const data = JSON.parse(message.toString());
         //console.log('Dados recebidos:', data);
         
+        const dataHora = new Date(); // Captura a hora do sistema no formato JS
+
         const query = `INSERT INTO atendimentos (bico_id, tempo_espera, tempo_atendimento, data_hora) VALUES ($1, $2, $3, $4)`;
-        const values = [data.bico_id, data.tempo_espera, data.tempo_atendimento, data.data_hora];
+
+        const values = [bico_id, tempo_espera, tempo_atendimento, dataHora];
+
+        // const query = `INSERT INTO atendimentos (bico_id, tempo_espera, tempo_atendimento, data_hora) VALUES ($1, $2, $3, $4)`;
+        // const values = [data.bico_id, data.tempo_espera, data.tempo_atendimento, data.data_hora];
         await client.query(query, values);
         console.log('Dados inseridos no banco');
     } catch (error) {
